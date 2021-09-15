@@ -6,13 +6,13 @@
 /*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 14:43:11 by oozsertt          #+#    #+#             */
-/*   Updated: 2021/09/14 20:34:03 by oozsertt         ###   ########.fr       */
+/*   Updated: 2021/09/15 11:07:42 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strlen(char *str)
+static int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -20,7 +20,7 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-int		ft_check_base(char *base)
+static int	ft_check_base(char *base)
 {
 	int	i;
 	int	j;
@@ -45,20 +45,17 @@ int		ft_check_base(char *base)
 	return (1);
 }
 
-int		ft_check_str(char *str, char *base)
+static int	ft_check_str(char *str, char *base)
 {
-	int i;
-	int j;
-	int count;
+	int	i;
+	int	j;
+	int	count;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	count = 0;
-	if (str[i] == '-')
-	{
-		i++;
+	if (str[++i] == '-')
 		count++;
-	}
 	while (str[i] != '\0')
 	{
 		while (base[j] != '\0')
@@ -70,12 +67,15 @@ int		ft_check_str(char *str, char *base)
 		j = 0;
 		i++;
 	}
-	return (ft_strlen(str) == count ? 1 : 0);
+	if (ft_strlen(str) == count)
+		return (1);
+	else
+		return (0);
 }
 
-int		ft_place_in_base(char c, char *str)
+static int	ft_place_in_base(char c, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -87,17 +87,15 @@ int		ft_place_in_base(char c, char *str)
 	return (0);
 }
 
-int		ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
 	long	res;
-	int		len_base;
 	int		sign;
 	int		i;
 
 	res = 0;
 	i = 0;
 	sign = 1;
-	len_base = ft_strlen(base);
 	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
 	if (ft_check_base(base) == 1 && ft_check_str(str, base) == 1)
