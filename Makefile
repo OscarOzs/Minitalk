@@ -6,35 +6,40 @@
 #    By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/18 22:17:55 by oozsertt          #+#    #+#              #
-#    Updated: 2021/09/18 23:32:18 by oozsertt         ###   ########.fr        #
+#    Updated: 2021/09/20 14:35:14 by oozsertt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FLAGS = -Wall -Werror -Wextra
+NAME_C =	client
 
-CLIENTFILES.C = client_main.c srcs/ft_itoa.c srcs/ft_convert_base.c \
-srcs/ft_atoi_base.c srcs/ft_strlen.c
+NAME_S =	server
 
-CLIENTFILES.O = client_main.o ft_itoa.o ft_convert_base.o \
-ft_atoi_base.o ft_strlen.o
+SRCS_C =	client_main.c srcs/ft_atoi_base.c srcs/ft_atoi.c srcs/ft_itoa.c \
+srcs/ft_convert_base.c srcs/ft_memset.c srcs/ft_strlen.c
 
-SERVERFILES.C = server_main.c srcs/ft_convert_base.c srcs/ft_atoi.c \
-srcs/ft_memset.c
+SRCS_S =	server_main.c srcs/ft_atoi_base.c srcs/ft_atoi.c srcs/ft_itoa.c \
+srcs/ft_convert_base.c srcs/ft_memset.c srcs/ft_strlen.c
 
-SERVERFILES.O = server_main.o ft_convert_base.o ft_atoi.o \
-ft_memset.o
+OBJS_S =		$(SRCS_S:.c=.o)
 
-all :
-	@gcc -c $(FLAGS) $(CLIENTFILES.C)
-	@gcc -o client $(CLIENTFILES.O)
-	@gcc -c $(FLAGS) $(SERVERFILES.C)
-	@gcc -o server $(SERVERFILES.O)
+OBJS_C =		$(SRCS_C:.c=.o)
+
+FLAGS =		-Wall -Werror -Wextra
+
+all : $(NAME_S) $(NAME_C)
+	
+$(NAME_S) : $(OBJS_S)
+	gcc $(FLAGS) $(OBJS_S) -o $(NAME_S)
+
+$(NAME_C) : $(OBJS_S)
+	gcc $(FLAGS) $(OBJS_C) -o $(NAME_C)
 
 clean :
-	@rm -rf $(CLIENTFILES.O) $(SERVERFILES.O)
+	@rm -rf $(SRCS_S)
+	@rm -rf $(SRCS_C)
 
 fclean : clean
-	@rm -rf $(NAME) ./server
-	@rm -rf $(NAME) ./client
+	@rm -rf $(NAME_S)
+	@rm -rf $(NAME_C)
 
 re : fclean all
