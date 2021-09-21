@@ -6,7 +6,7 @@
 /*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:19:00 by oozsertt          #+#    #+#             */
-/*   Updated: 2021/09/18 22:47:40 by oozsertt         ###   ########.fr       */
+/*   Updated: 2021/09/21 19:25:27 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	main(int ac, char **av)
 		printf("invalid arguments\n");
 		exit(EXIT_FAILURE);
 	}
-	server_pid = atoi(av[1]);
+	server_pid = ft_atoi(av[1]);
 	i = 0;
 	while (av[2][i] != '\0')
 	{
 		nbr = ft_itoa(av[2][i]);
-		binary = ft_convert_base(nbr, "0123456789", "01");
+		binary = ft_convert_fullbinary(nbr, "0123456789", "01");
 		send_signal(binary, server_pid);
 		free(nbr);
 		free(binary);

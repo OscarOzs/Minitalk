@@ -6,11 +6,13 @@
 /*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 10:57:41 by oozsertt          #+#    #+#             */
-/*   Updated: 2021/09/18 23:22:43 by oozsertt         ###   ########.fr       */
+/*   Updated: 2021/09/20 16:34:55 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
+
+int	ft_atoi_base(char *str, char *base);
 
 static int	get_nb_len(int nbr, char *base)
 {
