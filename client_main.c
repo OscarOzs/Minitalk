@@ -6,7 +6,7 @@
 /*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:19:00 by oozsertt          #+#    #+#             */
-/*   Updated: 2021/09/21 19:25:27 by oozsertt         ###   ########.fr       */
+/*   Updated: 2021/09/21 19:51:06 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ static void	send_signal(char *binary, pid_t pid)
 	}
 }
 
+static	void	malloc_failed(char *str)
+{
+	if (str == NULL)
+	{
+		printf("malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	char	*nbr;
@@ -66,7 +75,9 @@ int	main(int ac, char **av)
 	while (av[2][i] != '\0')
 	{
 		nbr = ft_itoa(av[2][i]);
+		malloc_failed(nbr);
 		binary = ft_convert_fullbinary(nbr, "0123456789", "01");
+		malloc_failed(binary);
 		send_signal(binary, server_pid);
 		free(nbr);
 		free(binary);
